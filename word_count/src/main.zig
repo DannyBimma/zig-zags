@@ -15,4 +15,29 @@ pub fn main() !void {
 
     const args = try std.process.argsAlloc(alloc);
     defer std.process.argsFree(alloc, args);
+
+    if (args.len != 2) {
+        printer("Improper Program Operation:\n In order to run program, input: {s} <file_name>", .{args[0]});
+        std.process.exit(1);
+    }
+
+    const textfile = args[1];
+
+    const file = std.fs.cwd().openFile(textfile, .{}) catch |err| {
+        switch (err) {
+            error.FileNotFound => {
+                printer("Sorry: Ain't no file named '{s}' up in here\n", .{textfile});
+                std.process.exit(1);
+            },
+            error.AccessDenied => {
+                printer("Sorry: Your access to the '{s}' file has been denied\n", .{textfile});
+                std.process.exit(1);
+            },
+            else => {
+                printer("Sorry: The '{s}' file faled to open succesfully for some reason or another: {}\n", .{ textfile, err });
+                std.process.exit(1);
+            },
+        }
+    };
+    defer file.close();
 }
