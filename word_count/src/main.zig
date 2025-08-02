@@ -55,3 +55,50 @@ fn isWord(c: u8) bool {
 fn isSentence(c: u8) bool {
     return c == '.' or c == '!' or c == '?';
 }
+
+fn countTextStats(content: []const u8) Tabulator {
+    var result = Tabulator{
+        .chars = 0,
+        .words = 0,
+        .sentences = 0,
+        .lines = 0,
+    };
+
+    var in_word = false;
+    var i: usize = 0;
+
+    while (i < content.len) {
+        const c = content[i];
+
+        result.characters += 1;
+
+        if (c == '\n') {
+            result.lines += 1;
+        }
+
+        if (isWord(c)) {
+            if (in_word) {
+                result.words += 1;
+                in_word = false;
+            }
+        } else {
+            in_word = true;
+        }
+
+        if (isSentence(c)) {
+            result.sentences += 1;
+        }
+
+        i += 1;
+    }
+
+    if (in_word) {
+        result.words += 1;
+    }
+
+    if (content.len > 0 and content[content.len - 1] != '\n') {
+        result.lines += 1;
+    }
+
+    return result;
+}
