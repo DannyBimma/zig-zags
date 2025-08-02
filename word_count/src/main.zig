@@ -50,7 +50,7 @@ pub fn main() !void {
     const stats = textCounter69(content);
 
     printer("File: {s}\n", .{textfile});
-    printer("Characters: {}\n", .{stats.characters});
+    printer("Characters: {}\n", .{stats.chars});
     printer("Words: {}\n", .{stats.words});
     printer("Sentences: {}\n", .{stats.sentences});
     printer("Lines: {}\n", .{stats.lines});
@@ -78,7 +78,7 @@ fn textCounter69(content: []const u8) Tabulator {
     while (i < content.len) {
         const c = content[i];
 
-        result.characters += 1;
+        result.chars += 1;
 
         if (c == '\n') {
             result.lines += 1;
