@@ -46,6 +46,14 @@ pub fn main() !void {
     defer allocate.free(content);
 
     _ = try file.readAll(content);
+
+    const stats = textCounter69(content);
+
+    printer("File: {s}\n", .{textfile});
+    printer("Characters: {}\n", .{stats.characters});
+    printer("Words: {}\n", .{stats.words});
+    printer("Sentences: {}\n", .{stats.sentences});
+    printer("Lines: {}\n", .{stats.lines});
 }
 
 fn isWord(c: u8) bool {
@@ -56,7 +64,7 @@ fn isSentence(c: u8) bool {
     return c == '.' or c == '!' or c == '?';
 }
 
-fn countTextStats(content: []const u8) Tabulator {
+fn textCounter69(content: []const u8) Tabulator {
     var result = Tabulator{
         .chars = 0,
         .words = 0,
