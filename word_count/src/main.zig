@@ -1,7 +1,7 @@
 const std = @import("std");
 const printer = std.debug.print; // Cool lil' trick
 
-const TotalValues = struct {
+const Tabulator = struct {
     chars: u32,
     words: u32,
     sentences: u32,
@@ -46,4 +46,12 @@ pub fn main() !void {
     defer allocate.free(content);
 
     _ = try file.readAll(content);
+}
+
+fn isWord(c: u8) bool {
+    return c == ' ' or c == '\t' or c == '\n' or c == '\r';
+}
+
+fn isSentence(c: u8) bool {
+    return c == '.' or c == '!' or c == '?';
 }
