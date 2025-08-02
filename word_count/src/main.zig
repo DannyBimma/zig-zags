@@ -11,10 +11,10 @@ const TotalValues = struct {
 pub fn main() !void {
     var gpa = std.heap.GeneralPurposeAllocator(.{}{});
     defer _ = gpa.deinit();
-    const alloc = gpa.allocator();
+    const allocate = gpa.allocator();
 
-    const args = try std.process.argsAlloc(alloc);
-    defer std.process.argsFree(alloc, args);
+    const args = try std.process.argsAlloc(allocate);
+    defer std.process.argsFree(allocate, args);
 
     if (args.len != 2) {
         printer("Improper Program Operation:\n In order to run program, input: {s} <file_name>", .{args[0]});
@@ -40,4 +40,10 @@ pub fn main() !void {
         }
     };
     defer file.close();
+
+    const file_size = try file.getEndPos();
+    const content = try allocate.alloc(u8, file_size);
+    defer allocate.free(content);
+
+    _ = try file.readAll(content);
 }
