@@ -272,7 +272,7 @@ Both implementations have a similar algorithmic complexity O(n) for file size, b
 - **Consistent style**: Built-in formatter ensures consistent code style
 - **Compile-time guarantees**: Most bugs are caught at compile time rather than runtime
 
-This is an extremely simply program, but my favourite to build when learning a new language.
+This is an extremely simple program, but my favourite to build when learning a new language.
 The Zig implementation demonstrates how modern systems programming languages can provide
 C-like performance; while significantly improving safety, maintainability, and developer
 experience. The source code was truly a joy to write 🙂
