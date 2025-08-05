@@ -16,6 +16,12 @@ const Vec3 = struct {
         const zd = m.pow(f64, self.z - other.z, 2.0);
         return m.sqrt(xd + yd + zd);
     }
+    // Doubles coordinate vals of Vec3 object
+    pub fn twice(self: *Vec3) void {
+        self.x = self.x * 2.0;
+        self.y = self.y * 2.0;
+        self.z = self.z * 2.0;
+    }
 };
 /// P.s. The self argument corresponds to the Vec3 object from
 /// which this distance() method is being called from.
