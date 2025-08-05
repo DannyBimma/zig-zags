@@ -1,6 +1,10 @@
 const std = @import("std");
 const m = std.math;
 
+pub fn main() void {
+    std.debug.print("Distance: {d}\n", .{v1.distance(v2)});
+}
+
 const Vec3 = struct {
     x: f64,
     y: f64,
@@ -24,7 +28,3 @@ const Vec3 = struct {
 const v1 = Vec3{ .x = 4.2, .y = 2.4, .z = 0.9 };
 
 const v2 = Vec3{ .x = 5.1, .y = 5.6, .z = 1.6 };
-
-pub fn main() void {
-    std.debug.print("Distance: {d}\n", .{v1.distance(v2)});
-}
